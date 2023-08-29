@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+* {
+	/* 여백과 테두리도 해당 요소의 크기 계산에 포함 */
+	box-sizing: border-box;
+}
+
+body {
+	/* 폰트 우선순위 지정 */
+	font-family: "Roboto", sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	background-position: center center;
+	background-size: cover;
+	transition: 0.4s;
+}
