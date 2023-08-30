@@ -35,11 +35,10 @@ input {
   position: relative;
 }
 input::placeholder {
-  outline: none;
-  text-align: center;
-  padding-top: 10px;
-  border: none;
-  color: #e6e6e6;
+  /* outline: none; */
+  /* text-align: center; */
+  /* border: none; */
+  /* color: #e6e6e6; */
   font-size: 30px;
   font-style: italic;
 }
@@ -54,6 +53,8 @@ li {
   width: 553px;
   list-style: none;
   margin-left: -42px;
+  white-space: pre-wrap;
+  flex-wrap: wrap;
   &:nth-child(1) {
     margin-top: -16px;
   }
