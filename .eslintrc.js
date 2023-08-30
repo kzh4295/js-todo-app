@@ -24,7 +24,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'html'],
+  plugins: ['html'],
   rules: {
     indent: ['error', 2],
     // 세미콜론 사용 여부 (세미콜론을 사용하도록 설정)
