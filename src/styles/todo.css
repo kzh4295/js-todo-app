@@ -7,11 +7,10 @@ h1 {
   text-align: center;
   color: rgba(175, 47, 47, 0.15);
 }
-.container {
+.todoContainer {
   width: 550px;
   height: 60px;
-  top: 300px;
-  position: relative;
+  margin-top: 300px;
 }
 .todoInput {
   font-size: 30px;
