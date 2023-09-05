@@ -9,8 +9,9 @@ h1 {
 }
 .todoContainer {
   width: 550px;
-  height: 60px;
-  margin-top: 300px;
+  height: auto; 
+  margin-top: 300px; 
+  margin-bottom: 500px; 
 }
 .todoInput {
   font-size: 30px;

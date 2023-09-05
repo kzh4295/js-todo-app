@@ -1,8 +1,8 @@
-import { initializeTaskInput } from './src/taskInput.js';
-import { createTaskItemElement } from './src/taskItem.js';
+import { handleTodoInput } from './src/todoInput.js';
+import { createTodoItemElement } from './src/todoItem.js';
 import { $ } from './utilFunc.js';
 
-const $taskInput = $('todoInput');
-const $taskList = $('taskList');
+const $todoInput = $('#todoInput');
+const $todoList = $('#todoList');
 
-initializeTaskInput($taskInput, $taskList, createTaskItemElement);
+handleTodoInput($todoInput, $todoList, createTodoItemElement);
