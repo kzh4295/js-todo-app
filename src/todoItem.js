@@ -6,7 +6,7 @@ function createImageElement(svgImage) {
   return buttonImg;
 }
 
-function handleToggleCompletion(isCompleted, todoTextSpan, unCheckedButtonImg) {
+function handleToggleCompletion({isCompleted, todoTextSpan, unCheckedButtonImg}) {
   isCompleted = !isCompleted;
   const newSrc = isCompleted ? checkedSvgImage : uncheckedSvgImage;
   todoTextSpan.style.textDecoration = isCompleted ? 'line-through' : '';
@@ -22,7 +22,7 @@ export function createTodoItemElement(text, $todoList) {
   let isCompleted = false; // 초기 완료 상태는 false로 설정
 
   const handleDelete = () => {
-    $todoList.removeChild(todoItemLi);
+    $todoList.element.removeChild(todoItemLi);
   };
 
   todoTextSpan.textContent = text;
@@ -39,9 +39,6 @@ export function createTodoItemElement(text, $todoList) {
   todoItemLi.appendChild(unCheckedButtonImg);
   todoItemLi.appendChild(todoTextSpan);
   todoItemLi.appendChild(deleteButtonImg);
-
-  // 초기 상태에 따라 스타일 설정
-  // handleToggleCompletion(isCompleted, todoTextSpan, unCheckedButtonImg);
 
   return todoItemLi;
 }

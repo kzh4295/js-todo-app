@@ -1,10 +1,12 @@
-export function handleTodoInput(
-  $todoInput,
-  $todoList,
-  createTodoItemElement
-) {
+import { $ } from './utils/dom.js';
+import { createTodoItemElement } from '../src/todoItem.js';
+
+const $todoInput = $('#todoInput');
+const $todoList = $('#todoList');
+
+export function handleTodoInput() {
   const handleKeydownTodoInput = (event) => {
-    const todoText = $todoInput.element.value.trim();
+    const todoText = event.target.value.trim();
 
     if (event.key !== 'Enter' || !todoText) {
       return;
@@ -15,5 +17,5 @@ export function handleTodoInput(
     $todoInput.element.value = '';
   };
 
-  $todoInput.addEventListener('keydown', (handleKeydownTodoInput));
+  $todoInput.addEventListener('keydown', handleKeydownTodoInput);
 }
