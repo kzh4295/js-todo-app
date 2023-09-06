@@ -15,7 +15,9 @@ export function handleTodoInput() {
     const todoItem = createTodoItemElement(todoText, $todoList);
     $todoList.element.appendChild(todoItem);
     $todoInput.element.value = '';
+
   };
 
   $todoInput.addEventListener('keydown', handleKeydownTodoInput);
+
 }

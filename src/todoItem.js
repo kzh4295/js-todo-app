@@ -1,4 +1,5 @@
 import { uncheckedSvgImage, checkedSvgImage, deleteSvgImage } from "../assets/icons/svgImg.js";
+import { $ } from './utils/dom.js';
 
 function createImageElement(svgImage) {
   const buttonImg = document.createElement('img');
@@ -6,12 +7,13 @@ function createImageElement(svgImage) {
   return buttonImg;
 }
 
+// 
 function handleToggleCompletion({isCompleted, todoTextSpan, unCheckedButtonImg}) {
   isCompleted = !isCompleted;
   const newSrc = isCompleted ? checkedSvgImage : uncheckedSvgImage;
   todoTextSpan.style.textDecoration = isCompleted ? 'line-through' : '';
   unCheckedButtonImg.src = `data:image/svg+xml,${encodeURIComponent(newSrc)}`;
-  return isCompleted; // 변경된 완료 상태 반환
+  return isCompleted; 
 }
 
 export function createTodoItemElement(text, $todoList) {
@@ -19,7 +21,12 @@ export function createTodoItemElement(text, $todoList) {
   const todoTextSpan = document.createElement('span');
   const unCheckedButtonImg = createImageElement(uncheckedSvgImage);
   const deleteButtonImg = createImageElement(deleteSvgImage);
-  let isCompleted = false; // 초기 완료 상태는 false로 설정
+
+  const todoObject = {
+    isCompleted:false,
+    todoTextSpan:todoTextSpan,
+    unCheckedButtonImg : unCheckedButtonImg
+  }
 
   const handleDelete = () => {
     $todoList.element.removeChild(todoItemLi);
@@ -32,13 +39,28 @@ export function createTodoItemElement(text, $todoList) {
   deleteButtonImg.classList.add('deleteBtn');
 
   unCheckedButtonImg.addEventListener('click', () => {
-    isCompleted = handleToggleCompletion(isCompleted, todoTextSpan, unCheckedButtonImg);
+    todoObject.isCompleted = handleToggleCompletion(todoObject);
   });
   unCheckedButtonImg.classList.add('unCheckedBtn');
 
   todoItemLi.appendChild(unCheckedButtonImg);
   todoItemLi.appendChild(todoTextSpan);
   todoItemLi.appendChild(deleteButtonImg);
+
+  // const ulElement = $('#todoList');
+  // const newDivElement = document.createElement('div');
+  // newDivElement.textContent = '새로운 div 요소입니다.';
+  // newDivElement.setAttribute('class', 'myDiv');
+  // ulElement.element.insertAdjacentElement('afterend', newDivElement);
+
+
+
+
+
+
+
+ 
+
 
   return todoItemLi;
 }
