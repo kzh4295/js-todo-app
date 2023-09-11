@@ -55,6 +55,7 @@ li {
 }
 
 .add{
+  /* cursor: pointer; */
   word-break: break-all;
   width: 430px;
 }
@@ -63,6 +64,6 @@ li {
   cursor: pointer;
 }
 
-.unCheckedBtn{
+.btnPointer{
   cursor: pointer;
 }
