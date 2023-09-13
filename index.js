@@ -28,15 +28,23 @@ const formatLi = (text, checkStatus) => {
 
   //---------------------------------------------------------------------
 // todoItem을 삭제하는 함수
+console.log('todos-1', todos)
  const handleTodoItemDelete = () => {
-  // todoItemLi가 있으면서 부모노드가 있으면 부모노드에서 todoItemLi를 제거
+  // 항목 삭제
+  const index = todos.findIndex((ele) => ele.text === todoState.text && ele.isChecked === todoState.isChecked);
+  if (index !== -1) {
+    todos.splice(index, 1); // 배열에서 해당 항목을 제거합니다.
+  }
+
+  // HTML에서도 삭제
   if (todoLi && todoLi.parentNode) {
-    todos.
     todoLi.parentNode.removeChild(todoLi);
   }
+  console.log('delete-todo', todos)
 };
 
   todoText.textContent = text;
+  //---------------------------------------------------------------------
 
   // 상태 객체를 생성하고 초기화
   const todoState = {
@@ -48,15 +56,24 @@ const formatLi = (text, checkStatus) => {
   checkArea.appendChild(createIcon(checkStatus ? checkedIcon : uncheckedIcon));
 
   checkArea.addEventListener('click', () => {
-    // 토글 상태
-    todoState.isChecked = !todoState.isChecked;
-
-    // 아이콘 변경
-    checkArea.innerHTML = '';
-    checkArea.appendChild(createIcon(todoState.isChecked ? checkedIcon : uncheckedIcon));
-
-    // 텍스트 스타일 변경
-    todoText.style.textDecoration = todoState.isChecked ? 'line-through' : '';
+    // 해당 항목을 찾음
+    const todoItem = todos.find((ele) => ele.text === todoState.text && ele.isChecked === todoState.isChecked);
+    if (todoItem) {
+      // 현재 isChecked 값을 토글
+      todoItem.isChecked = !todoItem.isChecked;
+      // todoState 업데이트
+      todoState.isChecked = todoItem.isChecked;
+  
+      // 이미지 아이콘의 src 속성 변경
+      const icon = todoItem.isChecked ? createIcon(checkedIcon) : createIcon(uncheckedIcon);
+      checkArea.innerHTML = '';
+      checkArea.appendChild(icon);
+  
+      // 텍스트 스타일 변경
+      todoText.style.textDecoration = todoItem.isChecked ? 'line-through' : '';
+  
+      console.log('check-todos', todos);
+    }
   });
 
   deleteButton.addEventListener('click', handleTodoItemDelete)
@@ -73,7 +90,6 @@ const addTodo = (event) => {
   if (event.key !== 'Enter') {
     return;
   }
-
   const todoText = $todoInput.value.trim();
   const todoObj = {
     isChecked: false,
@@ -87,14 +103,15 @@ const addTodo = (event) => {
   renderList();
 };
 
-
 //---------------------------------------------------------------------
 // 렌더 함수(addTodo, filter에서 모두 사용)
 const renderList = (basicTodos = todos) => {
   $todoList.innerHTML = ""; // todoList 초기화
 
   if (basicTodos === 'unCheckedTodos') {
+    console.log('basicTodos-1', basicTodos)
     basicTodos = todos.filter((ele) => !ele.isChecked);
+    console.log('basicTodos-2', basicTodos)
   } else if (basicTodos === 'checkedTodos') {
     basicTodos = todos.filter((ele) => ele.isChecked);
   }
@@ -111,55 +128,7 @@ const renderList = (basicTodos = todos) => {
 // input에 입력을 하면 todo추가
 $todoInput.addEventListener('keyup', addTodo);
 // todos는 모든 todo를 render
-$leftTodo.addEventListener('click', renderList(todos))
+$leftTodo.addEventListener('click', ()=>{renderList(todos)})
 // 필터링 해야지
-$centerTodo.addEventListener('click', renderList('unCheckedTodos'))
-$rightTodo.addEventListener('click', renderList('checkedTodos'))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // filterAreat가 생기는 조건의 함수
-// const addFilterArea = () => {}
-
-// // 체크 유무에 따른 처리
-// const toggleCheck = () => {}
-
-// // 할일 제거
-// const deleteTodo = () => {}
+$centerTodo.addEventListener('click', ()=>{renderList('unCheckedTodos')})
+$rightTodo.addEventListener('click', () =>{renderList('checkedTodos')})
