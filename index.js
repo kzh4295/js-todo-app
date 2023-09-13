@@ -26,38 +26,47 @@ const formatLi = (text, checkStatus) => {
   const todoText = document.createElement('span');
   const deleteButton = createIcon(deleteIcon);
 
+  //---------------------------------------------------------------------
+// todoItem을 삭제하는 함수
+ const handleTodoItemDelete = () => {
+  // todoItemLi가 있으면서 부모노드가 있으면 부모노드에서 todoItemLi를 제거
+  if (todoLi && todoLi.parentNode) {
+    todos.
+    todoLi.parentNode.removeChild(todoLi);
+  }
+};
+
   todoText.textContent = text;
 
-  // data 속성을 활용하여 정보 저장
-  todoLi.dataset.text = text;
-  todoLi.dataset.checked = checkStatus;
+  // 상태 객체를 생성하고 초기화
+  const todoState = {
+    text: text,
+    isChecked: checkStatus,
+  };
 
-  checkArea.appendChild(createIcon(uncheckedIcon));
+  // 초기 상태에 따라 아이콘 설정
+  checkArea.appendChild(createIcon(checkStatus ? checkedIcon : uncheckedIcon));
 
-//---------------------------------------------------------------------
   checkArea.addEventListener('click', () => {
-    // data 속성을 통해 정보를 읽어와 토글 동작 수행
-    const currentText = todoLi.dataset.text;
-    const currentChecked = todoLi.dataset.checked === 'true';
+    // 토글 상태
+    todoState.isChecked = !todoState.isChecked;
 
-    // 해당 항목을 찾아 토글
-    const todoItem = todos.find((ele) => ele.text === currentText && ele.isChecked === currentChecked);
-    if (todoItem) {
-      todoItem.isChecked = !currentChecked;
-      todoText.style.textDecoration = todoItem.isChecked ? 'line-through' : '';
+    // 아이콘 변경
+    checkArea.innerHTML = '';
+    checkArea.appendChild(createIcon(todoState.isChecked ? checkedIcon : uncheckedIcon));
 
-      // 아이콘 변경
-      checkArea.innerHTML = '';
-      checkArea.appendChild(createIcon(todoItem.isChecked ? checkedIcon : uncheckedIcon));
-    }
+    // 텍스트 스타일 변경
+    todoText.style.textDecoration = todoState.isChecked ? 'line-through' : '';
   });
+
+  deleteButton.addEventListener('click', handleTodoItemDelete)
+
   todoLi.appendChild(checkArea);
   todoLi.appendChild(todoText);
   todoLi.appendChild(deleteButton);
 
   return todoLi;
 };
-
 //---------------------------------------------------------------------
 // 할 일 목록에 아이템을 추가하는 함수
 const addTodo = (event) => {
@@ -77,6 +86,7 @@ const addTodo = (event) => {
 
   renderList();
 };
+
 
 //---------------------------------------------------------------------
 // 렌더 함수(addTodo, filter에서 모두 사용)
