@@ -10,10 +10,15 @@
     <h1 class="title">투두 리스트</h1>
     <div class="container">
       <div>
-        <input id="taskInput" type="text" placeholder="할일을 추가해주세요!" autofocus autocomplete="off"/>
+        <input id="todoInput" type="text" placeholder="할일을 추가해주세요!" autofocus autocomplete="off"/>
       </div>
-      <ul id="taskList"></ul>
+      <ul id="todoList"></ul>
+      <!-- 필터 테스트하려고 만든 임의의 버튼  -->
+      <button id = 'allTodo'>모두</button>
+      <button id = 'leftTodo'>남은거</button>
+      <button id = 'completedTodo'>완성한 거</button>
+      <button id = 'completedAll'>모두 완성</button>
     </div>
-    <script src="index.js"></script>
+    <script type="module" src="index.js"></script>
   </body>
 </html>
